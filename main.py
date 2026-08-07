@@ -1,6 +1,10 @@
 import io_handler
 import analyzer
 import pyfiglet
+from matplotlib import pylab
+import warnings
+from Bio import BiopythonWarning
+warnings.simplefilter('ignore', BiopythonWarning)
 
 def main():
     print(pyfiglet.figlet_format("GenShell"))
@@ -14,7 +18,7 @@ def main():
     
     while True:
         print(f"\n--- Secuencia actual: {record.id} ---")
-        print("1. GC | 2. Complemento | 3. Transcripción | 4. Traducción | 5. Inversa | 6. Salir")
+        print("1. GC | 2. Complemento | 3. Transcripción | 4. Traducción | 5. Inversa | 6.Grafico GC | 7. Salir")
         
         eleccion = input("Opción: ")
         
@@ -29,6 +33,9 @@ def main():
         elif eleccion == '5':
             print(f"Secuencia Inversa: {analyzer.procesar_inversa(record)}")
         elif eleccion == '6':
+            print("Generando grafica GC...")
+            analyzer.grafica_gc(record)
+        elif eleccion == '7':
             print("¡Hasta luego!")
             break
         else:
